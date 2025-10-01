@@ -1,0 +1,16 @@
+*.pyc
+.mypy_cache
+.vscode
+.idea
+poetry.lock
+uv.lock
+dist
+htmlcov
+*.egg-info
+.coverage*
+coverage.xml
+site
+.cache
+.venv*
+.python-version
+.DS_Store
