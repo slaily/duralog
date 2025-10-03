@@ -1,9 +1,9 @@
 import os
-import json
 import zlib
 import fcntl
 import queue
 import struct
+import orjson as json
 
 from os import fsync
 from pathlib import Path
@@ -96,7 +96,7 @@ class DuraLog:
             A tuple containing the utf-8 encoded payload and the integer type flag.
         """
         if isinstance(data, dict):
-            return json.dumps(data).encode("utf-8"), self._TYPE_JSON
+            return json.dumps(data), self._TYPE_JSON
 
         return data.encode("utf-8"), self._TYPE_STRING
 
