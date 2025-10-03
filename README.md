@@ -41,7 +41,7 @@ The benchmark measures end-to-end throughput by having 8 concurrent threads writ
 
 **Read (replay) performance**
 
-The benchmark measures the aggregate throughput of 4 separate processes all reading a 2-million-record log file at the same time.
+The benchmark measures the aggregate throughput when 4 concurrent processes read the same log file. In total, 5 million records were processed.
 
--   **Result:** Over **1,300,000 reads/second**.
+-   **Result:** Over **1,298,000 reads/second**.
 -   **What this means for you:** Minimizing downtime is critical. This speed means your application can restart, read a massive log file with millions of entries, and recover its state in a matter of seconds.
