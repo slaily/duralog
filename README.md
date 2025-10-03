@@ -8,44 +8,40 @@
 
 `duralog` in three points:
 
-*   **Guarantees data durability:** It ensures every write is safely stored on disk *before* your application proceeds, so you can reliably recover your state after a crash.
+*   **Guarantees data durability:** It ensures every write is safely stored on disk before your application proceeds, so you can reliably recover your state after a crash.
 *   **Keeps your application fast:** Your application writes to an in-memory queue in microseconds and moves on. The slow work of disk I/O happens in the background, so your application remains highly responsive.
 *   **Maximizes write throughput:** Allows your application to ingest over **141,000 events per second** under heavy, concurrent load.
 
-### See it in Action (Quickstart)
+### Table of Contents
 
-Let's simulate a crash. We'll write two critical user events, "close" the log, and then prove that the data is still there when we "restart" the application.
+-   [Installation](#installation)
+-   [Quickstart](#quickstart)
+-   [Performance](#performance)
+-   [License](#license)
 
-```python
-import os
-from duralog import DuraLog
+### Installation
 
-log_file = "my_app.log"
-if os.path.exists(log_file):
-    os.remove(log_file)
-
-# --- Your Application ---
-print("Phase 1: Writing initial data...")
-log = DuraLog(file_path=log_file)
-log.append({"event": "user_signup", "user_id": "user-123"})
-log.append({"event": "user_purchase", "user_id": "user-123", "item": "item-abc"})
-log.close() # Graceful shutdown
-print("Data written. Application has 'crashed'.")
-
-# --- Application Restarts ---
-print("\nPhase 2: Recovering data after restart...")
-recovered_log = DuraLog(file_path=log_file)
-
-# The replay() method reads all records from the log.
-recovered_data = list(recovered_log.replay())
-
-assert len(recovered_data) == 2
-assert recovered_data[0]["event"] == "user_signup"
-assert recovered_data[1]["item"] == "item-abc"
-
-print(f"Successfully recovered {len(recovered_data)} records.")
-for record in recovered_data:
-    print(f"  - {record}")
-
-recovered_log.close()
+```bash
+pip install duralog
 ```
+
+### Quickstart
+
+
+### Performance
+
+`duralog` is built for speed. All benchmarks were run on a modern Linux system with a consumer-grade NVMe SSD.
+
+#### Write performance
+
+The benchmark measures end-to-end throughput by having 8 concurrent threads write a total of 10 million records.
+
+-   **Result:** Over **141,000 writes/second**.
+-   **What this means for you:** You can confidently log every API request, database query, and user interaction in a high-traffic system without a sweat. Your application will never be blocked waiting for the log.
+
+#### Read (replay) performance
+
+The benchmark measures the aggregate throughput of 4 separate processes all reading a 2-million-record log file at the same time.
+
+-   **Result:** Over **1,300,000 reads/second**.
+-   **What this means for you:** Minimizing downtime is critical. This speed means your application can restart, read a massive log file with millions of entries, and recover its state in a matter of seconds.
