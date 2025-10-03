@@ -16,6 +16,7 @@
 
 -   [Installation](#installation)
 -   [Quickstart](#quickstart)
+-   [API Reference](#api-reference)
 -   [Performance](#performance)
 -   [License](#license)
 
@@ -27,6 +28,41 @@ pip install duralog
 
 ### Quickstart
 
+### API Reference
+
+The public API of `duralog` is intentionally minimal, focusing on three core methods.
+
+---
+
+**`duralog.append(data: dict | str)`**
+
+Asynchronously adds a record to a high-speed in-memory queue for later persistence.
+
+```python
+log.append({"event": "user_login", "user_id": 123, "status": "success"})
+```
+
+---
+
+**`duralog.replay() -> Generator[dict | str, None, None]`**
+
+Returns a memory-efficient generator that yields every valid record from the log file.
+
+```python
+# Replay the log to rebuild the application's state on startup
+user_events = [record for record in log.replay() if record.get("event")]
+```
+
+---
+
+**`duralog.close()`**
+
+Durably writes all pending records to disk and gracefully closes the log file.
+
+```python
+# Call this on application shutdown to ensure no data is lost
+log.close()
+```
 
 ### Performance
 
