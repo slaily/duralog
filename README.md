@@ -32,14 +32,14 @@ pip install duralog
 
 `duralog` is built for speed. All benchmarks were run on a modern Linux system with a consumer-grade NVMe SSD.
 
-#### Write performance
+**Write performance**
 
 The benchmark measures end-to-end throughput by having 8 concurrent threads write a total of 10 million records.
 
 -   **Result:** Over **141,000 writes/second**.
 -   **What this means for you:** You can confidently log every API request, database query, and user interaction in a high-traffic system without a sweat. Your application will never be blocked waiting for the log.
 
-#### Read (replay) performance
+**Read (replay) performance**
 
 The benchmark measures the aggregate throughput of 4 separate processes all reading a 2-million-record log file at the same time.
 
