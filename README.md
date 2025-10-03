@@ -45,3 +45,7 @@ The benchmark measures the aggregate throughput when 4 concurrent processes read
 
 -   **Result:** Over **1,298,000 reads/second**.
 -   **What this means for you:** Minimizing downtime is critical. This speed means your application can restart, read a massive log file with millions of entries, and recover its state in a matter of seconds.
+
+### License
+
+duralog is available under the MIT License.
