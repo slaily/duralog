@@ -5,7 +5,7 @@ description = "A high-performance, thread-safe, and durable Write-Ahead Log (WAL
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
-license-files = ["LICENSE"]
+license-files = ["LICENSE.md"]
 authors = [
     { name = "Iliyan Slavov", email = "iliyan.n.slavov@gmail.com" }
 ]
