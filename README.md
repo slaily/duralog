@@ -30,7 +30,7 @@ pip install duralog
 
 ### Performance
 
-`duralog` is built for speed. All benchmarks were run on a modern Linux system with a consumer-grade NVMe SSD.
+All benchmarks were run on a modern Linux system with a consumer-grade NVMe SSD.
 
 **Write performance**
 
